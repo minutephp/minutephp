@@ -11,3 +11,9 @@ composer.lock
 /db
 /public/test.php
 
+/app/Controller
+/app/EventHandler
+/app/Model
+/app/Route
+/app/View
+!/app/View/Layout/Global.php
