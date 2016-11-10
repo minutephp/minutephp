@@ -1,0 +1,13 @@
+composer.lock
+/app/Config/db-config
+/node_modules
+/public/static/bower_components
+/public/static/typings
+/vendor
+/.idea
+/test
+/tmp
+/public/tmp
+/db
+/public/test.php
+

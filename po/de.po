@@ -1,0 +1,87 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"X-Generator: Poedit 1.8.8\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: de\n"
+
+#: vendor/minutephp/cms/app/View/Admin/Pages.php:7
+msgid "Admin"
+msgstr "nimda"
+
+#: vendor/minutephp/cms/app/View/Admin/Pages.php:15
+msgid "All website pages"
+msgstr "segap etisbew lla"
+
+#: vendor/minutephp/auth/app/View/Auth/LoginPopup.php:27
+msgid "Email address:"
+msgstr ""
+
+#: vendor/minutephp/auth/app/View/Auth/LoginPopup.php:13
+msgid "Email is not registered."
+msgstr ""
+
+#: vendor/minutephp/auth/app/View/Auth/CreatePasswordPopup.php:7
+#: vendor/minutephp/auth/app/View/Auth/ForgotPasswordPopup.php:7
+#: vendor/minutephp/auth/app/View/Auth/SignupPopup.php:6
+msgid "Email:"
+msgstr ""
+
+#: vendor/minutephp/auth/app/View/Auth/LoginPopup.php:53
+msgid "I forgot my password"
+msgstr ""
+
+#: vendor/minutephp/cms/app/View/Admin/Pages.php:4
+msgid "Minute page builder"
+msgstr ""
+
+#: vendor/minutephp/auth/app/View/Auth/LoginPopup.php:56
+msgid "New user? Sign up now!"
+msgstr ""
+
+#: vendor/minutephp/cms/app/View/Admin/Pages.php:4
+#: vendor/minutephp/cms/app/View/Admin/Pages.php:8
+msgid "Page builder"
+msgstr ""
+
+#: vendor/minutephp/auth/app/View/Auth/LoginPopup.php:14
+msgid "Password is incorrect."
+msgstr ""
+
+#: vendor/minutephp/auth/app/View/Auth/LoginPopup.php:35
+msgid "Password:"
+msgstr ""
+
+#: vendor/minutephp/cms/app/View/Admin/Pages.php:19
+msgid "Search pages.."
+msgstr ""
+
+#: vendor/minutephp/auth/app/View/Auth/LoginPopup.php:4
+#: vendor/minutephp/auth/app/View/Auth/LoginPopup.php:45
+msgid "Sign in"
+msgstr ""
+
+#: vendor/minutephp/auth/app/View/Auth/LoginPopup.php:68
+msgid "Sign in using"
+msgstr ""
+
+#: vendor/minutephp/auth/app/View/Auth/CreatePasswordPopup.php:11
+#: vendor/minutephp/auth/app/View/Auth/ForgotPasswordPopup.php:11
+#: vendor/minutephp/auth/app/View/Auth/SignupPopup.php:10
+msgid "Submit"
+msgstr ""
+
+#: vendor/minutephp/auth/app/View/Auth/LoginPopup.php:15
+msgid "Unable to process login."
+msgstr ""
+
+#: app/View/Homepage.php:2
+msgid "hello there!"
+msgstr ""

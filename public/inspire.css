@@ -1,0 +1,360 @@
+html, body {
+    font-family: 'Open Sans', sans-serif;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%
+}
+
+.transparent, nav li.active > a {
+    background: transparent !important;
+    border: 0 solid #000 !important;
+    box-shadow: none !important;
+}
+
+div.background-cover {
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+#landing {
+    background-color: #2980b9;
+    background-position: right center;
+}
+
+div.section {
+    margin: 40px 0 20px 0;
+}
+
+.ctaButton {
+    padding-top: 15px;
+}
+
+div.step p {
+    font-size: 18px;
+}
+
+div h2.step-heading {
+    margin-bottom: 30px;
+}
+
+div h2.pricing-heading {
+    margin: 30px 0;
+    text-align: center;
+}
+
+div.overlay {
+    background: #000;
+    background: -moz-linear-gradient(top, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.75) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(0, 0, 0, 1)), color-stop(100%, rgba(0, 0, 0, 0.75))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.75) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.75) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.75) 100%); /* IE10+ */
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.75) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#000000', endColorstr='#bf000000', GradientType=0); /* IE6-9 */
+
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+}
+
+div.padded {
+    padding: 20px 0;
+}
+
+div.side-padded {
+    padding: 0 20px;
+}
+
+.padded-lightly {
+    padding: 10px;
+}
+
+a.navbar-brand {
+    padding: 10px 15px;
+}
+
+a.navbar-brand img {
+    max-height: 38px;
+}
+
+div.padded-2x {
+    padding: 50px 0;
+}
+
+div.backrow {
+    background: #F0F1F4;
+}
+
+.jumbotron-inverse {
+    color: white;
+}
+
+.jumbotron p {
+    font-weight: 100;
+    font-size: 17px;
+}
+
+.jumbotron small {
+    font-weight: 100;
+    font-size: 12px;
+}
+
+.jumbotron .btn {
+    padding: 16px 38px;
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.navbar-nav > li a {
+    font-size: 20px;
+}
+
+.text-tiny {
+    font-size: 12px;
+}
+
+.navbar-nav > li {
+    padding: 10px 12px;
+}
+
+.navbar-nav > li .btn {
+    padding: 2px 10px;
+}
+
+div.red {
+    background: red;
+}
+
+h1.title, h2.title, h3.title, h4.title {
+    border: 0;
+    border-bottom: 1px solid #e5e5e5;
+    padding-bottom: 15px;
+    margin-bottom: 25px;
+}
+
+h3.title {
+    font-size: 21px;
+    color: #333;
+}
+
+h2.title {
+    margin-top: 0;
+}
+
+div.carousel .overlay {
+    background: #000;
+    opacity: 0.65;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+div.carousel .item img {
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    max-width: none;
+}
+
+div.carousel .carousel-caption {
+    background: #000;
+    opacity: 0.75;
+    padding-bottom: 20px;
+    left: 0;
+    width: 100%;
+}
+
+.footer {
+    margin-top: 30px;
+}
+
+div.bottom-line {
+    margin: 40px 0 30px 10px;
+    clear: both;
+}
+
+img.flexible {
+    max-width: 100%;
+}
+
+ul.jumplist.pager > li {
+    margin-right: 10px;
+}
+
+ul.jumplist.breadcrumb {
+    background: transparent;
+}
+
+div.section {
+    position: relative;
+}
+
+ul.jumplistholder {
+    position: relative;
+    text-align: center;
+    margin: auto;
+}
+
+ul.jumplist.affix {
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: 0;
+    z-index: 1000;
+    text-align: center;
+}
+
+.pricing .panel-body {
+    padding: 0;
+}
+
+.pricing.panel-primary .panel-heading small {
+    color: #ccc;
+}
+
+.pricing.panel-primary .panel-heading a {
+    color: #eee;
+}
+
+.centered {
+    text-align: center;
+    font-size: 0;
+}
+
+.centered > div {
+    float: none;
+    display: inline-block;
+    text-align: left;
+    font-size: 13px;
+}
+
+div.qa {
+    padding: 5px 20px 5px 20px;
+}
+
+div.qa h4 {
+    font-weight: 500;
+}
+
+.carousel-control {
+    width: 6%;
+}
+
+.carousel-control.left {
+    background-image: linear-gradient(to right, rgba(0, 0, 0, .05) 0, rgba(0, 0, 0, .0001) 100%);
+}
+
+.carousel-control.right {
+    background-image: linear-gradient(to right, rgba(0, 0, 0, .0001) 0, rgba(0, 0, 0, .05) 100%);
+}
+
+img {
+    max-width: 100%;
+}
+
+div.content {
+    margin-top: 30px;
+    font-size: 20px;
+    font-weight: 100;
+}
+
+div.comments, div.social {
+    margin-top: 30px;
+}
+
+div.fixed-width {
+    background-repeat: no-repeat;
+    background-size: cover !important;
+    background-position: center center;
+    height: 120px;
+    width: 100%;
+}
+
+a.related, a.related:hover {
+    color: #333;
+    text-decoration: none;
+}
+
+a.related p.more {
+    margin: 25px 0;
+    color: #0081c2;
+}
+
+a.related h3 {
+    font-weight: bold;
+}
+
+a.related p.more:hover {
+    text-decoration: underline;
+}
+
+.no-border, ul.no-border li {
+    border: 0;
+}
+
+.no-shadow, ul.no-border li {
+    box-shadow: none;
+}
+
+ul.list-compressed li {
+    padding: 5px 10px;
+}
+
+.pull-center {
+    text-align: center;
+    margin: auto
+}
+
+h3.step-title {
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+input.searchbar {
+    background: transparent;
+    height: 66px;
+    padding: 10px 16px;
+    font-size: 24px;
+    line-height: 25px;
+    border: 0 !important;
+    text-align: center;
+    font-family: Arial, FontAwesome, serif;
+}
+
+input.searchbar:focus {
+    text-align: left;
+}
+
+@media (min-width: 979px) {
+    #navtop {
+        padding-top: 10px;
+    }
+
+    ul.nav > li > a {
+        font-size: 1.5em;
+    }
+
+    .footer {
+        margin-top: 75px;
+    }
+
+    header.backheader {
+        min-height: 300px;
+    }
+
+    div.content {
+        font-size: 24px;
+    }
+
+    p.related {
+        font-size: 20px;
+    }
+}
+

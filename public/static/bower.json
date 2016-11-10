@@ -1,0 +1,59 @@
+{
+  "name": "static",
+  "authors": [
+    "Sanchit <dev@minutephp.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.7",
+    "angular-filter": "^0.5.8",
+    "angular-http-auth": "^1.3.0",
+    "angular-loading-bar": "^0.9.0",
+    "angular-ui-sortable": "^0.14.2",
+    "font-awesome": "^4.6.3",
+    "lodash": "^4.13.1",
+    "angular-mocks": "^1.5.7",
+    "alertifyjs": "^1.0.11",
+    "AdminLTE": "admin-lte#^2.3.5",
+    "moment": "^2.14.1",
+    "angular-bs-tooltip": "*",
+    "jquery-ui": "^1.12.0",
+    "ng-jsoneditor": "^1.0.0",
+    "angular-sanitize": "^1.5.7",
+    "angular-markdown-filter": "^1.4.0",
+    "ngWig": "ng-wig#^3.0.4",
+    "bootstrap": "^3.3.7",
+    "jquery": "^3.1.0",
+    "zeroclipboard": "^2.2.0",
+    "ng-clip": "^0.2.6",
+    "Detect.js": "^2.2.2",
+    "swfobject": "*",
+    "jsoneditor": "^5.5.7",
+    "mousetrap": "^1.6.0",
+    "angular-country-select": "minutejs/angular-country-select",
+    "angular-dynamic-html": "minutejs/angular-dynamic-html",
+    "angular-json-form": "minutejs/angular-json-form",
+    "angular-markdown": "minutejs/angular-markdown",
+    "angular-tree-menu": "minutejs/angular-tree-menu",
+    "animate.css": "*",
+    "minute": "minutejs/minute",
+    "nya-bootstrap-select": "*",
+    "wow": "^1",
+    "es6-promise": "^3.3.1"
+  },
+  "resolutions": {
+    "angular": "^1.5.8",
+    "jquery": "^3.1.0",
+    "jsoneditor": "^5.5.7"
+  }
+}
