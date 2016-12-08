@@ -1,27 +1,27 @@
 <div ng-controller="ideaController as stepCtrl">
-    <form ng-init="form.idea.type = form.idea.type || 'keyword'; form.idea.keyword = form.idea.keyword || 'golf'">
+    <form ng-init="project.idea.type = project.idea.type || 'keyword'; project.idea.keyword = project.idea.keyword || 'golf'">
         <p class="help-block">
             <span translate="">Type a video "keyword" to generate ideas for your viral video!</span>
         </p>
 
         <div class="form-group">
-            <div class="alert-box" ng-class="{'alert-selected': form.idea.type == 'keyword'}">
+            <div class="alert-box" ng-class="{'alert-selected': project.idea.type == 'keyword'}">
                 <div class="radio">
                     <label>
-                        <input type="radio" ng-model="form.idea.type" value="keyword">
-                        <span ng-class="{'text-bold': form.idea.type == 'keyword'}" translate="">Generate video ideas based on my keyword (recommended)</span>
+                        <input type="radio" ng-model="project.idea.type" value="keyword">
+                        <span ng-class="{'text-bold': project.idea.type == 'keyword'}" translate="">Generate video ideas based on my keyword (recommended)</span>
                     </label>
                 </div>
-                <div class="left-padded" ng-if="form.idea.type == 'keyword'">
+                <div class="left-padded" ng-if="project.idea.type == 'keyword'">
                     <div class="row">
                         <div class="col-sm-9">
                             <input type="text" class="form-control auto-focus" id="keyword" placeholder='Enter any keyword like "weight loss", "golf", "movies", "games", "forex", etc'
-                                   ng-model="form.idea.keyword" ng-required="true">
+                                   ng-model="project.idea.keyword" ng-required="true">
                             <p class="help-block"><span translate="">Type a keyword and then click "Generate ideas" button to generate ideas for your video!</span></p>
                         </div>
                         <div class="col-sm-3">
-                            <button type="button" class="btn btn-flat btn-primary" ng-click="stepCtrl.ideaPopup()" ng-disabled="!form.idea.keyword"
-                                    ng-class="{'text-bold': form.idea.type == 'keyword'}">
+                            <button type="button" class="btn btn-flat btn-primary" ng-click="stepCtrl.ideaPopup()" ng-disabled="!project.idea.keyword"
+                                    ng-class="{'text-bold': project.idea.type == 'keyword'}">
                                 <i class="fa fa-lightbulb-o"></i> <span translate="">Generate ideas..</span>
                             </button>
                         </div>
@@ -31,17 +31,17 @@
         </div>
 
         <div class="form-group">
-            <div class="alert-box" ng-class="{'alert-selected': form.idea.type == 'manual'}">
+            <div class="alert-box" ng-class="{'alert-selected': project.idea.type == 'manual'}">
                 <div class="radio">
                     <label>
-                        <input type="radio" ng-model="form.idea.type" value="manual">
-                        <span ng-class="{'text-bold': form.idea.type == 'manual'}" translate="">I want to directly enter my own video idea</span>
+                        <input type="radio" ng-model="project.idea.type" value="manual">
+                        <span ng-class="{'text-bold': project.idea.type == 'manual'}" translate="">I want to directly enter my own video idea</span>
                     </label>
                 </div>
-                <div class="left-padded" ng-if="form.idea.type == 'manual'">
+                <div class="left-padded" ng-if="project.idea.type == 'manual'">
                     <input type="text" class="form-control auto-focus" id="manualIdea"
                            placeholder="Enter a video idea that can be turned into a list of items. E.g. 3 funniest movies, 5 best golfers.."
-                           ng-model="form.idea.title" ng-required="true" minlength="3">
+                           ng-model="project.idea.title" ng-required="true" minlength="3">
                     <p class="help-block">
                         <span translate="">Only input ideas that can be turned into a list of items, e.g. 3 epic fails, most amazing tv shows, etc</span>
                         <a href="" tooltip="Learn more.." class="text-muted" tutorial="/help/good-ideas"><i class="fa fa-question-circle"></i></a>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:mx="library://ns.adobe.com/flex/mx" layout="vertical" minWidth="955" minHeight="600"
+    applicationComplete="init_RTMP()">
+    <fx:Script>
+        <![CDATA[
+            public var netStreamObj:NetStream;
+
+            public var nc:NetConnection;
+
+            public var vid:Video;
+
+            public var streamID:String;
+
+            public var videoURL:String;
+
+            public var metaListener:Object;
+
+            public var counter = 0;
+
+            function init_RTMP():void {
+                /*
+                streamID  = "mp4:myVideo";
+                videoURL = "rtmp://fms.xstream.dk/*********.mp4";
+                */
+                streamID = "countdown";
+                videoURL = "rtmp://s223ky9aug173x.cloudfront.net/cfx/st/";
+
+                //rtmp://dev.wowza.longtailvideo.com/vod/_definst_/sintel/640.mp4
+                //rtmp://s223ky9aug173x.cloudfront.net/cfx/st/countdown.flv
+
+                vid = new Video(); //typo! was "vid = new video();"
+
+                nc = new NetConnection();
+                nc.addEventListener(NetStatusEvent.NET_STATUS, onConnectionStatus);
+                nc.addEventListener(AsyncErrorEvent.ASYNC_ERROR, asyncErrorHandler);
+                nc.client = { onBWDone: function():void {}};
+                nc.connect(videoURL);
+            }
+
+            private function onConnectionStatus(e:NetStatusEvent):void {
+                trace("status", e.info.code);
+
+                if (e.info.code == "NetConnection.Connect.Success") {
+                    trace("Creating NetStream");
+                    netStreamObj = new NetStream(nc);
+
+                    metaListener = new Object();
+                    metaListener.onMetaData = received_Meta;
+                    netStreamObj.client = metaListener;
+
+                    netStreamObj.play(streamID);
+                    vid.attachNetStream(netStreamObj);
+                    rawChildren.addChild(vid);
+                        //intervalID = setInterval(playback, 1000);
+                }
+            }
+
+            private function playback():void {
+                trace((++counter) + " Buffer length: " + netStreamObj.bufferLength);
+            }
+
+            public function asyncErrorHandler(event:AsyncErrorEvent):void {
+                trace("asyncErrorHandler.." + "\r");
+            }
+
+            public function onFCSubscribe(info:Object):void {
+                trace("onFCSubscribe - succesful");
+            }
+
+            public function onBWDone(... rest):void {
+                var p_bw:Number;
+                if (rest.length > 0) {
+                    p_bw = rest[0];
+                }
+                trace("bandwidth = " + p_bw + " Kbps.");
+            }
+
+            function received_Meta(data:Object):void {
+                var _stageW:int = stage.stageWidth;
+                var _stageH:int = stage.stageHeight;
+
+                var _videoW:int;
+                var _videoH:int;
+                var _aspectH:int;
+
+                var Aspect_num:Number; //should be an "int" but that gives blank picture with sound
+                Aspect_num = data.width / data.height;
+
+                //Aspect ratio calculated here..
+                _videoW = _stageW;
+                _videoH = _videoW / Aspect_num;
+                _aspectH = (_stageH - _videoH) / 2;
+
+                vid.x = 0;
+                vid.y = _aspectH;
+                vid.width = _videoW;
+                vid.height = _videoH;
+            }
+        ]]>
+    </fx:Script>
+	
+	<mx:Button click="test()" label="test()"/>
+</mx:Application>

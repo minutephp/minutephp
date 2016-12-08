@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<text:SimpleText xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:text="text.*" transformX="{width/2}" transformY="{height/2}">
+    <fx:Script>
+        <![CDATA[
+            import com.greensock.easing.Linear;
+            import com.greensock.plugins.DropShadowFilterPlugin;
+            import com.greensock.plugins.TweenPlugin;
+
+            override protected function init():void {
+                super.init();
+
+                TweenPlugin.activate([ DropShadowFilterPlugin ]);
+
+                if (subTitle) {
+                    timeline.to(text1, stepDuration, { alpha: 1 });
+                    timeline.to(text1, stepDuration, { alpha: 0 }, "+=" + stepDuration);
+                }
+
+                timeline.to(text2, stepDuration, { alpha: 1 });
+            }
+        ]]>
+    </fx:Script>
+
+    <mx:Canvas id="innerContent" width="100%" height="100%" horizontalScrollPolicy="off" verticalScrollPolicy="off">
+        <mx:HBox horizontalAlign="center" verticalAlign="middle" width="100%" height="100%" id="text1" alpha="0">
+            <mx:Text text="{subTitle}" fontSize="{subTitleSize}" id="subTitleText" width="95%" textAlign="center" selectable="false" />
+        </mx:HBox>
+
+        <mx:HBox horizontalAlign="center" verticalAlign="middle" width="100%" height="100%" id="text2" alpha="0">
+            <mx:Text text="{title}" fontSize="{titleSize}" id="titleText" width="95%" textAlign="center" selectable="false" />
+        </mx:HBox>
+    </mx:Canvas>
+</text:SimpleText>

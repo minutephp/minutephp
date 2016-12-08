@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:tubeloc="com.enefekt.tubeloc.*"
+				width="100%" height="100%" layout="horizontal" horizontalAlign="left" creationComplete="{initMovieExample();}">
+	<!--
+	Copyright 2009 Ben Longoria
+	
+	Licensed under the Apache License, Version 2.0 (the "License");
+	you may not use this file except in compliance with the License.
+	You may obtain a copy of the License at
+	
+	http://www.apache.org/licenses/LICENSE-2.0
+	
+	Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS,
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific language governing permissions and
+	limitations under the License.
+	-->
+	<mx:Style source="style.css"/>
+	
+	<mx:Script>
+		<![CDATA[
+			import mx.collections.ArrayCollection;
+			import com.enefekt.tubeloc.event.*;
+			import flash.net.*;
+			import flash.events.*;
+			
+			/**
+			 * Demo for Flex YouTube Player API
+			 * 
+			 * @author Ben Longoria enefekt@gmail.com
+			 */
+			
+			[Bindable] public var videoList:ArrayCollection;
+			
+			private function initMovieExample():void {
+				//create videoList with label/data name/video id
+				var djItem:Object = {
+					label:"DJ",
+					data:"q6iGexp7Pn8"
+				};
+				
+				var grafItem:Object = {
+					label:"Write Graffiti",
+					data:"bB3rMMTeCtE"
+				};
+				
+				var emceeItem:Object = {
+					label:"Emcee",
+					data:"6TAAx01TMi8"
+				};
+				
+				var beatBoxItem:Object = {
+					label:"Beatbox",
+					data:"zOq6rCsh7Mw"
+				};
+				
+				var bboyItem:Object = {
+					label:"Breakdance",
+					data:"GJ1sZBTnbuE"
+				};
+				
+				videoList = new ArrayCollection();
+				videoList.addItem({label:"Select a video", data:null});
+				videoList.addItem(djItem);
+				videoList.addItem(grafItem);
+				videoList.addItem(emceeItem);
+				videoList.addItem(beatBoxItem);
+				videoList.addItem(bboyItem);
+				
+				//init volume
+				volumeField.text = tubelocMovie.volume.toString();
+			}
+			
+			public function changePlayerSize():void {
+				var playerHeight:Number = sizeSlider.value;
+				var playerWidth:Number = Math.ceil(playerHeight * 1.333333);
+				tubelocMovie.width = playerWidth;
+				tubelocMovie.height = playerHeight;
+			}
+			
+			public function slideTipFormatter(value_p:Number):String { 
+				var playerHeight:Number = sizeSlider.value;
+				var playerWidth:Number = Math.ceil(playerHeight * 1.333333);
+				return playerWidth.toString() + "x" + playerHeight.toString();
+			}
+			
+			public function loadMovie():void {
+				var newVideoId:String = loadAnotherMovie.selectedItem.data as String;
+				if(newVideoId) {
+					tubelocMovie.videoId = newVideoId;
+				}
+			}
+		]]>
+	</mx:Script>
+	
+	<mx:VBox width="350" verticalGap="20">
+		<mx:Label text="Chromeless Player Demo" styleName="jumboLabel" />
+		<!-- video choose -->
+		<mx:HBox verticalAlign="middle">
+			<mx:ComboBox id="loadAnotherMovie" dataProvider="{videoList}" styleName="bigLabel"
+						 change="{loadMovie();}" />
+		</mx:HBox>
+		<!-- button controls -->
+		<mx:HBox>
+			<mx:Button label="Pause" click="{tubelocMovie.pauseVideo();}" width="75" />
+			<mx:Button label="Play" click="{tubelocMovie.playVideo();}" width="75" />
+			<mx:Button id="muteButton" label="{(muteButton.selected) ? 'Un Mute' : 'Mute'}" width="75" toggle="true" 
+					   click="{(muteButton.selected) ? tubelocMovie.mute() : tubelocMovie.unMute();}" />
+		</mx:HBox>
+		<mx:HBox>
+			<mx:Button label="Stop" click="{tubelocMovie.stopVideo();}" width="75" />
+			<mx:Button label="Clear" click="{tubelocMovie.clearVideo();}" width="75" />
+			<mx:Button label="Destroy" click="{tubelocMovie.destroy();}" width="75" />
+		</mx:HBox>
+		
+		<!-- form layout -->
+		<mx:Form fontWeight="bold" verticalGap="15">
+			<!-- seek to field -->
+			<mx:FormItem label="Seek To:" direction="horizontal" horizontalAlign="center">
+				<mx:HBox verticalAlign="middle" width="100%">
+					<mx:TextInput id="seekToAmount" restrict="[0-9]" fontWeight="none"/>
+					<mx:Button label="Seek To" fontWeight="none" 
+							   click="{(seekToAmount.text == '') ? tubelocMovie.currentTime = 0 : tubelocMovie.currentTime = parseInt(seekToAmount.text)}" />
+				</mx:HBox>
+			</mx:FormItem>
+			<!-- volume tester -->
+			<mx:FormItem label="Volume:" direction="horizontal" horizontalAlign="center">
+				<mx:HBox verticalAlign="middle" width="100%">
+					<mx:HSlider id="volumeSlider" width="100%" minimum="0" maximum="100" value="100" labelStyleName="sliderLabels"
+								dataTipPlacement="top" snapInterval="1" tickInterval="0" allowTrackClick="true" liveDragging="true"
+								change="{tubelocMovie.volume = volumeSlider.value;muteButton.selected = false}" />
+					<mx:Label id="volumeField" text="{tubelocMovie.volume}" fontWeight="none" />
+				</mx:HBox>
+			</mx:FormItem>
+			<!-- player size tester -->
+			<mx:FormItem label="Player Size:">
+				<mx:HBox verticalAlign="middle" width="100%">
+					<mx:HSlider id="sizeSlider" width="100%" minimum="180" maximum="480" value="240" labelStyleName="sliderLabels"
+								dataTipPlacement="top" snapInterval="1" tickInterval="0" dataTipFormatFunction="{slideTipFormatter}" 
+								allowTrackClick="false" liveDragging="true" thumbRelease="{changePlayerSize();}" />
+					<mx:Label id="playerSizeField" text="{tubelocMovie.width.toString() + 'x' + tubelocMovie.height.toString()}" fontWeight="none" />
+				</mx:HBox>
+			</mx:FormItem>
+			<!-- player state field -->
+			<mx:FormItem label="Player State:">
+				<mx:TextInput editable="false" text="{tubelocMovie.stateDescription}" fontWeight="none"/>
+			</mx:FormItem>
+			<!-- current time field -->
+			<mx:FormItem label="Current Time:">
+				<mx:TextInput editable="false" text="{tubelocMovie.currentTime}" fontWeight="none"/>
+			</mx:FormItem>
+			<!-- duration field -->
+			<mx:FormItem label="Duration:">
+				<mx:TextInput editable="false" text="{tubelocMovie.duration}" fontWeight="none"/>
+			</mx:FormItem>
+			<!-- URL field -->
+			<mx:FormItem label="Video Url:">
+				<mx:LinkButton id="youtubeLink" label="View on YouTube" 
+							   click="{navigateToURL(new URLRequest(tubelocMovie.videoUrl));}" 
+							   styleName="youtubeLink" fontWeight="none"/>
+			</mx:FormItem>
+			<!-- embed code field -->
+			<mx:FormItem label="Embed Code:">
+				<mx:TextInput id="embedField" editable="false" width="100" text="{tubelocMovie.videoEmbedCode}" fontWeight="none" 
+							  focusIn="{embedField.selectionBeginIndex=0;embedField.selectionEndIndex=embedField.text.length as Number;}" />
+			</mx:FormItem>
+		</mx:Form>
+		
+	</mx:VBox>
+	
+	<!-- TubeLoc Movie Component -->
+	<tubeloc:Movie id="tubelocMovie" width="320" height="240" chromeless="true" />
+	
+</mx:Application> 

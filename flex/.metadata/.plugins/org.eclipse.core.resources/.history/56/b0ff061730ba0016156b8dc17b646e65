@@ -1,0 +1,75 @@
+package com.greensock.loading.display {
+    import flash.events.Event;
+    import flash.events.ProgressEvent;
+    import flash.system.Security;
+    import flash.utils.setTimeout;
+    
+    import mx.controls.VideoDisplay;
+    import mx.events.VideoEvent;
+
+    public class YoutubePlayer extends VideoDisplay {
+        public var buffer:int = 1;
+
+        public var end:int = -1;
+
+        public var start:int = 0;
+
+        public var videoURL:String = '';
+
+        private var ready:Boolean = false;
+
+        public function YoutubePlayer() {
+            super();
+
+            width = 854;
+            height = 480;
+            alpha = 0;
+            autoPlay = false;
+
+            Security.allowDomain("*");
+            Security.allowInsecureDomain("*");
+
+            this.addEventListener(VideoEvent.PLAYHEAD_UPDATE, updatePlayer);
+        }
+
+        public function loadVideo():void {
+            this.bufferTime = Math.max(this.end, 20);
+            this.ready = false;
+            this.source = 'http://www.stockutils.com/get-youtube-url?id=Q3xktII_PVY'; // this.videoURL;
+
+            this.removeEventListener(VideoEvent.READY, loadComplete);
+            this.addEventListener(VideoEvent.READY, loadComplete);
+
+            trace('loading started: http://www.stockutils.com/get-youtube-url?id=Q3xktII_PVY');
+            this.load();
+        }
+
+        public function playVideo():void {
+            if (this.ready) {
+                trace('playing video..');
+                this.play();
+            } else {
+                callLater(playVideo);
+            }
+        }
+
+        private function loadComplete(event:Event):void {
+            ready = true;
+            playheadTime = 4;
+			setTimeout(function(){
+            dispatchEvent(new Event(flash.events.Event.COMPLETE));
+            trace('pausing video..', start);
+			}, 5000);
+        }
+
+        protected function updatePlayer(event:VideoEvent):void {
+            if (event.playheadTime > this.end || 999999) {
+                //pause();
+            }
+        }
+
+        public function get duration():uint {
+            return Math.max(1, end - start);
+        }
+    }
+}

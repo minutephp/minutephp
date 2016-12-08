@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<text:SimpleText xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:text="text.*" transformX="{width/2}" transformY="{height/2}">
+    <fx:Script>
+        <![CDATA[
+            import com.greensock.TimelineMax;
+            import com.greensock.TweenLite;
+            import com.greensock.TweenMax;
+            import com.greensock.easing.*;
+            import com.greensock.events.TweenEvent;
+            import com.greensock.text.FlexSplitTextField;
+            import com.greensock.text.SplitTextField;
+
+            import flash.utils.setTimeout;
+
+            private var tline:TimelineMax;
+
+            override protected function init():void {
+                super.init();
+
+                if (subTitle) {
+                    animate(subTitleText);
+                }
+
+                animate(titleText, false);
+
+                tline = new TimelineMax({ repeat: 100, yoyo: true });
+                tline.fromTo(underscore, 0.1, { alpha: 0 }, { alpha: 1 });
+
+                timeline.addEventListener(TweenEvent.START, function(... rest):void {
+                    tline.play(0);
+                });
+            }
+
+            override public function hide(duration:Number):void {
+                var tfs:Array = stfDic[titleText].textFields.reverse()
+                if (tfs && tfs.length > 0) {
+                    timeline.staggerTo(tfs, stepDuration, { alpha: 0, onComplete: tline.stop }, stepDuration / tfs.length);
+                }
+            }
+
+            protected function animate(txt:Text, fade:Boolean = true):void {
+                this.validateNow();
+
+                var size:uint = txt.getStyle('fontSize');
+
+                stfDic[txt] = new FlexSplitTextField(txt, SplitTextField.TYPE_CHARACTERS);
+                var textFields:Array = stfDic[txt].textFields;
+
+                if (textFields && textFields.length > 0) {
+                    timeline.to(txt.parent, 0, { alpha: 1 });
+                    timeline.staggerFrom(textFields, 1, { alpha: 0,
+                                             ease: Linear.easeNone,
+                                             onStart: function():void {
+                                                 underscore.y = 0;
+                                                 underscore.x = 0;
+                                                 underscore.alpha = 0;
+                                             },
+                                             onUpdateParams: [ "{self}", size ],
+                                             onUpdate: function(self:TweenLite, s:uint):void {
+                                                 underscore.setStyle('fontSize', s);
+                                                 underscore.x = Math.max(self.target.x + 50, underscore.x);
+                                                 underscore.y = self.target.parent.parent.y + 10;
+                                                 underscore.alpha = self.target.alpha = 1;
+                                             }}, 0.1);
+
+                    if (fade) {
+                        timeline.staggerTo(textFields, stepDuration, { alpha: 0 }, stepDuration / textFields.length);
+                    }
+                }
+            }
+        ]]>
+    </fx:Script>
+
+    <mx:Canvas id="innerContent" width="100%" height="100%" horizontalScrollPolicy="off" verticalScrollPolicy="off">
+        <mx:HBox horizontalAlign="center" verticalAlign="middle" width="100%" height="100%" id="text1" alpha="0">
+            <mx:Text text="{subTitle}" fontSize="{subTitleSize}" id="subTitleText" width="95%" textAlign="center" selectable="false"/>
+        </mx:HBox>
+
+        <mx:HBox horizontalAlign="center" verticalAlign="middle" width="100%" height="100%" id="text2" alpha="0">
+            <mx:Text text="{title}" fontSize="{titleSize}" id="titleText" width="95%" textAlign="center" selectable="false"/>
+        </mx:HBox>
+
+        <mx:Text text="_" fontSize="{titleSize}" id="underscore" alpha="0"/>
+
+    </mx:Canvas>
+
+</text:SimpleText>

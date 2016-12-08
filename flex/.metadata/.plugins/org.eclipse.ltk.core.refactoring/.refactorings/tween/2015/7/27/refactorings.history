@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;tween/src/fx/AstonBig.mxm&apos; to &apos;AstonBig.mxml&apos;" description="Rename resource &apos;AstonBig.mxm&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/fx/AstonBig.mxm" name="AstonBig.mxml" stamp="1436032240953" updateReferences="true"/>
+</session>

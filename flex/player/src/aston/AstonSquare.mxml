@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<aston:Aston xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:aston="aston.*">
+    <fx:Script>
+        <![CDATA[
+            import com.greensock.*;
+            import com.greensock.easing.*;
+            import com.greensock.plugins.*;
+            import mx.core.UIComponent;
+
+            [Bindable]
+            private var wd:uint = 100;
+
+            override protected function init():void {
+                super.init();
+
+                wd = Math.min(width - 20, Math.max(text1.width, text2.width) + 45);
+
+                timeline.fromTo(box1, stepDuration, { x: width - 40, width: 30 }, { alpha: 1, x: 0, ease: Linear.easeOut });
+                timeline.fromTo(box1, stepDuration, { width: 30 }, { width: wd });
+                timeline.to(mainTxt, stepDuration, { alpha: 1 });
+
+                timeline.fromTo(box2, stepDuration, { x: width - 40, width: 30 }, { alpha: 1, x: 0, ease: Linear.easeOut });
+                timeline.fromTo(box2, stepDuration, { width: 30 }, { width: Math.max(logo.x + logo.width, wd - 40)});
+                timeline.to(logo, stepDuration, { alpha: 1 });
+            }
+        ]]>
+    </fx:Script>
+
+    <mx:Canvas x="20" y="{mainTxt.y}" height="{mainTxt.height}" backgroundColor="black" backgroundAlpha="1" horizontalScrollPolicy="off" verticalScrollPolicy="off" id="box1"
+        alpha="0"/>
+    <mx:Canvas x="60" y="{logo.y}" height="{logo.height}" backgroundColor="white" backgroundAlpha="1" horizontalScrollPolicy="off" verticalScrollPolicy="off" id="box2" alpha="0"/>
+
+    <mx:HBox x="0" backgroundColor="black" backgroundAlpha="1" horizontalScrollPolicy="off" verticalScrollPolicy="off" y="{yPos-(text1.height+10)}" id="mainTxt" alpha="0"
+        paddingRight="10" paddingLeft="20" horizontalAlign="right" width="{wd}">
+        <mx:Text id="text1" text="{title}" color="white" fontSize="{titleSize}" maxWidth="{width-20}"/>
+    </mx:HBox>
+
+    <mx:HBox id="logo" height="30" backgroundColor="white" backgroundAlpha="1" horizontalScrollPolicy="off" verticalScrollPolicy="off" paddingTop="2" paddingBottom="2"
+        paddingRight="10" paddingLeft="20" y="{mainTxt.y + mainTxt.height + 2}" horizontalAlign="right" alpha="0" width="{wd-5}">
+        <mx:Image visible="{pic}" includeInLayout="{pic}" source="{pic.hasOwnProperty('source') ? pic.source : pic}" height="{text2.height}" scaleContent="true"
+            smoothBitmapContent="true"/>
+        <mx:Text text="{subTitle}" color="black" fontSize="{subTitleSize}" id="text2"/>
+    </mx:HBox>
+
+</aston:Aston>

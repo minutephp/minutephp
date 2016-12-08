@@ -1,0 +1,166 @@
+package com.greensock.loading {
+    import com.greensock.events.LoaderEvent;
+    import com.greensock.loading.core.LoaderItem;
+
+    import flash.display.Bitmap;
+    import flash.events.Event;
+    import flash.events.IEventDispatcher;
+    import flash.events.ProgressEvent;
+    import flash.net.URLRequest;
+    import flash.system.ApplicationDomain;
+    import flash.system.Security;
+    import flash.system.SecurityDomain;
+    import flash.utils.setTimeout;
+
+    import mx.charts.chartClasses.InstanceCache;
+    import mx.controls.Alert;
+    import mx.core.FlexGlobals;
+    import mx.core.UIComponent;
+    import mx.events.StyleEvent;
+    import mx.styles.CSSStyleDeclaration;
+    import mx.utils.ObjectUtil;
+
+    public class LoaderMaxEx extends LoaderMax {
+        private var app:UIComponent;
+
+        public function LoaderMaxEx(vars:Object = null) {
+            super(vars);
+            app = FlexGlobals.topLevelApplication.document;
+            skipFailed = true;
+            skipPaused = true;
+        }
+
+        public function loadAll(data:Object):void {
+            var app:UIComponent = FlexGlobals.topLevelApplication.document;
+            var width:uint = app.width || 854;
+            var height:uint = app.height || 480;
+            var results:Array = getAssets(data);
+
+            for (var i:int = 0; i < results.length; i++) {
+                var result:Object = results[i];
+                var parent:Object = result.parent || {};
+                var type:String = result.type == 'url' ? detectType(result.url) || parent.type : result.type;
+                var url:String = result.url;
+                //var altUrl:String = '/generic/url-proxy?urls[]=' + encodeURI(url);
+
+                if (url) {
+                    var loader:* = null;
+
+                    trace("type", type, url);
+
+                    if (type === 'youtube') {
+                        loader = new YoutubeLoader(url, { start: parent.start || parent.startTime || 0, end: parent.end || parent.endTime || 20, volume: parent.volume || 40, width: width, height: height });
+                    } else if (type == 'video') {
+                        loader = new VideoLoader(url, { autoPlay: false, volume: parent.volume || 100, width: width, height: height });
+                    } else if (type == 'image') {
+                        loader = new ImageLoader(url, { scaleMode: 'proportionalOutside', centerRegistration: false });
+                    } else if (type == 'audio') {
+                        loader = new MP3Loader(url, { autoPlay: false });
+                    } else if (type == 'swf') {
+                        loader = new SWFLoader(url, { width: width, height: height });
+                    } else if (type == 'font') {
+                        var styleKey:String = findMatchingKey(data, parent);
+                        loader = new FontLoader(url, { className: styleKey, attrs: parent });
+                    }
+
+                    if (loader is LoaderItem) {
+                        this.append(loader);
+                    }
+                }
+            }
+
+            this.load();
+        }
+
+        public function getScaledImage(urlOrName:String, maxWidth:int = 128, maxHeight:int = 128, fitOutside:Boolean = false):UIComponent {
+            var holder:UIComponent = new UIComponent();
+
+            var imgLoader:ImageLoader = LoaderMax.getLoader(urlOrName);
+
+            if (imgLoader) {
+                var bitmap:Bitmap = imgLoader.rawContent;
+
+                if (bitmap) {
+                    var scale:Number = Math[fitOutside ? 'max' : 'min'](1, maxWidth / (bitmap.width || maxWidth), maxHeight / (bitmap.height || maxHeight));
+                    bitmap.x = bitmap.y = 0;
+                    bitmap.smoothing = true;
+                    bitmap.scaleX = bitmap.scaleY = scale;
+                    holder.addChild(bitmap);
+                    holder.width = bitmap.width;
+                    holder.height = bitmap.height;
+                }
+            }
+
+            return holder;
+        }
+
+        private function findMatchingKey(obj:Object, match:Object):String {
+            if (typeof(obj) === 'object') {
+                for (var keyz:String in obj) {
+                    if (obj[keyz] === match) {
+                        return keyz;
+                    } else if (typeof(obj[keyz]) === 'object') {
+                        var result:String = findMatchingKey(obj[keyz], match);
+                        if (result) {
+                            return result;
+                        }
+                    }
+                }
+            }
+
+            return null;
+        }
+
+        private function getAssets(object:Object, root:String = 'root', parent:Object = null):Array {
+            var results:Array = [];
+
+            if (typeof(object) === 'object') {
+                for (var key:String in object) {
+                    var result:Array = getAssets(object[key], key, object);
+                    results = results.concat(result);
+                }
+            } else if ([ 'audio', 'video', 'image', 'css', 'swf', 'font', 'url' ].indexOf(root) !== -1) {
+                results.push({ type: root, url: object, parent: parent });
+            } else if (/^(https?|\/).*\.(jpg|png|mp3|jpeg|mp4|swf)$/i.test(object as String)) {
+                results.push({ type: 'url', url: object, parent: parent });
+            }
+
+            return results;
+        }
+
+        private function detectType(url:String):String {
+            return /youtube\.com/i.test(url) ? 'youtube' : (/\.(mp4|flv)$/i.test(url) ? 'video' : (/\.(jpg|jpeg|gif|png|bmp|ico)$/i.test(url) ? 'image' : (/\.(mp3|wav)$/i.test(url) ? 'audio' : (/\.(swf)$/i.test(url) ? 'swf' : ''))));
+        }
+
+        private function addArguments(method:Function, additionalArguments:Array):Function {
+            return function(event:Event):void {
+                method.apply(null, [ event ].concat(additionalArguments));
+            }
+        }
+
+        public function test(url:String, onLoad:Function):void {
+            new DataLoader(url, { onComplete: function(event:LoaderEvent):void {
+                var wrapper:Object = JSON.parse(DataLoader(event.target).content);
+                var project:Object = wrapper.project;
+                var metadata:Object = wrapper.metadata;
+
+                app.width = 854;
+                app.height = 480;
+
+                new LoaderMaxEx({ onComplete: function():void {
+                    trace("all loaded!");
+                    onLoad(project);
+                }, onError: function(event:*) {
+                    trace("error: ", event);
+                }, onProgress: function(event:LoaderEvent) {
+                    var loaders:Array = this._loaders;
+					if(loaders){
+                    for (var i = 0; i < loaders.length; i++) {
+                        trace("loader", loaders[i]);
+                    }
+					}
+                }}).loadAll(project);
+            }}).load(true);
+        }
+    }
+}

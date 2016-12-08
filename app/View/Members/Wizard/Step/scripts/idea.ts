@@ -4,13 +4,13 @@ module App {
     export class IdeaController {
         constructor(public $scope: any, public $minute: any, public $ui: any, public $search: any, public $timeout: ng.ITimeoutService, public $q: ng.IQService,
                     public gettext: angular.gettext.gettextFunction, public gettextCatalog: angular.gettext.gettextCatalog) {
-            $scope.wizard.nextEnabled = () => !!$scope.form.idea.title;
+            $scope.wizard.nextEnabled = () => !!$scope.project.idea.title;
             //$timeout(this.ideaPopup);
         }
 
         ideaPopup = () => {
             this.$scope.popup = {data: {loading: true}};
-            this.$ui.popupUrl('/generate-ideas-popup.html', false, null, {ctrl: this, idea: this.$scope.form.idea, data: this.$scope.popup.data});
+            this.$ui.popupUrl('/generate-ideas-popup.html', false, null, {ctrl: this, idea: this.$scope.project.idea, data: this.$scope.popup.data});
             this.generateIdeas();
         };
 
@@ -26,7 +26,7 @@ module App {
                 };
             }
 
-            var keyword = this.$scope.form.idea.keyword;
+            var keyword = this.$scope.project.idea.keyword;
             var promises = [];
             var seen = {};
             var data = angular.extend(this.$scope.popup.data, {loading: true, categories: [], count: 0, more: more});
@@ -81,7 +81,7 @@ module App {
 
         editIdea = () => {
             this.close();
-            this.$scope.form.idea.type = 'manual';
+            this.$scope.project.idea.type = 'manual';
             this.$timeout(() => $('#manualIdea').focus().select(), 500);
         };
 

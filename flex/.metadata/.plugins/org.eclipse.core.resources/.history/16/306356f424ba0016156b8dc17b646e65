@@ -1,0 +1,64 @@
+/**
+ * VERSION: 1.897
+ * DATE: 2012-01-14
+ * AS3
+ * UPDATES AND DOCS AT: http://www.greensock.com/loadermax/
+ **/
+package com.greensock.loading {
+	import com.greensock.events.LoaderEvent;
+	import com.greensock.loading.core.LoaderItem;
+	import com.greensock.loading.display.YoutubePlayer;
+	
+	import flash.events.Event;
+	import flash.events.ProgressEvent;
+	import flash.system.Security;
+	
+	import mx.core.FlexGlobals;
+	
+	public class YoutubeLoader extends LoaderItem {
+		/** @private **/
+		private static var _classActivated:Boolean = _activateClass("YoutubeLoader", YoutubeLoader, "youtube");
+		
+		private var player:YoutubePlayer;
+		
+		public function YoutubeLoader(urlOrRequest:*, vars:Object = null) {
+			vars = vars || {};
+			vars.name = urlOrRequest;
+			super('', vars);
+			_type = "YoutubeLoader";
+			
+			Security.allowDomain("*.googlevideo.com");
+			Security.allowInsecureDomain("*.googlevideo.com");
+			
+			player = new YoutubePlayer();
+			player.addEventListener(Event.COMPLETE, videoLoaded);
+			player.addEventListener(ProgressEvent.PROGRESS, videoProgress);
+			
+			player.videoURL = urlOrRequest;
+			player.start = vars.hasOwnProperty('start') ? parseInt(vars.start) : 0;
+			player.end = vars.hasOwnProperty('end') ? parseInt(vars.end) : -1;
+			player.volume = vars.hasOwnProperty('volume') ? parseInt(vars.volume) : 100;
+			player.width = vars.hasOwnProperty('width') ? parseInt(vars.width) : 854;
+			player.height = vars.hasOwnProperty('height') ? parseInt(vars.height) : 480;
+		}
+		
+		protected function videoProgress(event:ProgressEvent):void {
+			//trace("progress:", this.url, event.bytesLoaded, event.bytesTotal);
+			_progressHandler(event.clone());
+		}
+		
+		protected function videoLoaded(event:Event):void {
+			trace('video loaded');
+			_progressHandler(new ProgressEvent(ProgressEvent.PROGRESS, false, false, 100, 100));
+			_completeHandler(null);
+		}
+		
+		override protected function _load():void {
+			FlexGlobals.topLevelApplication.addChild(player);
+			_content = FlexGlobals.topLevelApplication.removeChild(player);
+			player.load();
+			
+			dispatchEvent(new LoaderEvent(LoaderEvent.INIT, this));
+		}
+	}
+}

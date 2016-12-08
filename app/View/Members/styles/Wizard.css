@@ -7,11 +7,6 @@
     border-radius: 5px;
 }
 
-.minute-modal .dialog > .box-lg {
-    width: 98%;
-    max-width: 700px;
-}
-
 .alert-selected {
     border: 1px solid #eee;
     background: #efefef;
@@ -34,7 +29,28 @@ div.media-add-button:hover {
     margin-top: -100px;
 }
 
-.media-add-button > div {
-    padding-top: 35px;
-    height: 145px;
+.media-add-button > a {
+    padding: 77px 0;
+    display: block;
+}
+
+.truncated {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.fixed-height {
+    height: 200px !important;
+}
+
+.image-editor-canvas {
+    height: 480px !important;
+    overflow: auto !important;
+    background: #fff !important;
+}
+
+.minute-modal .dialog > .box-youtube {
+    width: 99%;
+    max-width: 858px;
 }

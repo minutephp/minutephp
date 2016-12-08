@@ -4,7 +4,7 @@ module App {
     export class ItemController {
         constructor(public $scope: any, public $minute: any, public $ui: any, public $search: any, public $timeout: ng.ITimeoutService, public $q: ng.IQService,
                     public gettext: angular.gettext.gettextFunction, public gettextCatalog: angular.gettext.gettextCatalog) {
-            $scope.wizard.nextEnabled = () => !!$scope.form.item.count && !!$scope.form.item.type;
+            $scope.wizard.nextEnabled = () => !!$scope.project.item.count && !!$scope.project.item.type;
         }
 
         extractNumber = (title) => {

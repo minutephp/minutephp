@@ -25,7 +25,7 @@ var App;
             this.isPlural = function (word) {
                 return /\w+s$/i.test(word);
             };
-            $scope.wizard.nextEnabled = function () { return !!$scope.form.item.count && !!$scope.form.item.type; };
+            $scope.wizard.nextEnabled = function () { return !!$scope.project.item.count && !!$scope.project.item.type; };
         }
         return ItemController;
     }());

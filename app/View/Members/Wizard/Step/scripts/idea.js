@@ -14,7 +14,7 @@ var App;
             this.gettextCatalog = gettextCatalog;
             this.ideaPopup = function () {
                 _this.$scope.popup = { data: { loading: true } };
-                _this.$ui.popupUrl('/generate-ideas-popup.html', false, null, { ctrl: _this, idea: _this.$scope.form.idea, data: _this.$scope.popup.data });
+                _this.$ui.popupUrl('/generate-ideas-popup.html', false, null, { ctrl: _this, idea: _this.$scope.project.idea, data: _this.$scope.popup.data });
                 _this.generateIdeas();
             };
             this.generateIdeas = function (more) {
@@ -28,7 +28,7 @@ var App;
                         other: ['10 about %k%', '10 things %k%', 'list of %k%']
                     };
                 }
-                var keyword = _this.$scope.form.idea.keyword;
+                var keyword = _this.$scope.project.idea.keyword;
                 var promises = [];
                 var seen = {};
                 var data = angular.extend(_this.$scope.popup.data, { loading: true, categories: [], count: 0, more: more });
@@ -72,14 +72,14 @@ var App;
             };
             this.editIdea = function () {
                 _this.close();
-                _this.$scope.form.idea.type = 'manual';
+                _this.$scope.project.idea.type = 'manual';
                 _this.$timeout(function () { return $('#manualIdea').focus().select(); }, 500);
             };
             this.ideaScore = function (item) {
                 var score = (/^(top|best|worst)\s+(\d+)/i.test(item) ? 1 : /(top|best|worst)\s+(\d+)/i.test(item) ? 2 : /^\d+/i.test(item) ? 3 : /\d+/i.test(item) ? 4 : 100) * item.length;
                 return _this.$scope.popup.data.more ? score : 0;
             };
-            $scope.wizard.nextEnabled = function () { return !!$scope.form.idea.title; };
+            $scope.wizard.nextEnabled = function () { return !!$scope.project.idea.title; };
             //$timeout(this.ideaPopup);
         }
         return IdeaController;

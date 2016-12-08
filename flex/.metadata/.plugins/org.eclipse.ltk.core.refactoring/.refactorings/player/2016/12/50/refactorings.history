@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;player/[source path] libs/com/greensock/loading/YoutubeLoader.as&apos; to &apos;_YoutubeLoader.as&apos;" description="Rename resource &apos;YoutubeLoader.as&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="[source path] libs/com/greensock/loading/YoutubeLoader.as" name="_YoutubeLoader.as" stamp="1480822467770" updateReferences="true"/>
+</session>
