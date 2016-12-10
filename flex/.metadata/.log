@@ -2469,3 +2469,17 @@ Command-line arguments:  -os win32 -ws win32 -arch x86
 
 !ENTRY com.adobe.flexbuilder.ui 4 1 2016-12-07 17:11:24.812
 !MESSAGE Product = null version = 460 edition = prem
+!SESSION 2016-12-09 15:41:23.175 -----------------------------------------------
+eclipse.buildId=I20100608-0911
+java.version=1.6.0_16
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.ui 2 0 2016-12-09 15:41:30.754
+!MESSAGE Warnings while parsing the commands from the 'org.eclipse.ui.commands' and 'org.eclipse.ui.actionDefinitions' extension points.
+!SUBENTRY 1 org.eclipse.ui 2 0 2016-12-09 15:41:30.754
+!MESSAGE Commands should really have a category: plug-in='com.qnx.flashbuilder.multiplatform.qnx.ui', id='com.qnx.flashbuilder.multiplatform.qnx.ui.commands.OpenInfoCenter', categoryId='com.qnx.flashbuilder.multiplatform.qnx.ui.commands.category.help'
+
+!ENTRY com.adobe.flexbuilder.ui 4 1 2016-12-09 15:41:42.548
+!MESSAGE Product = null version = 460 edition = prem
