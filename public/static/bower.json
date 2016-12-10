@@ -49,13 +49,10 @@
     "minute": "minutejs/minute",
     "nya-bootstrap-select": "*",
     "wow": "^1",
-    "es6-promise": "^3.3.1",
-    "ng-image-cropper": "https://unpkg.com/angular-image-cropper/bower.zip",
-    "angular-youtube-mb": "^1.3.1",
-    "angularjs-slider": "^5.8.7"
+    "es6-promise": "^3.3.1"
   },
   "resolutions": {
-    "angular": "^1.5.8",
+    "angular": "^1.6",
     "jquery": "^3.1.0",
     "jsoneditor": "^5.5.7"
   }

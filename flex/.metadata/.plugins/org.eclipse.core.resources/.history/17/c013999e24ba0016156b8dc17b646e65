@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<mx:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
-    xmlns:mx="library://ns.adobe.com/flex/mx" layout="absolute" minWidth="955" minHeight="600">
-    <fx:Declarations>
-        <!-- Place non-visual elements (e.g., services, value objects) here -->
-    </fx:Declarations>
-
-    <mx:VideoDisplay source="http://www.stockutils.com/get-youtube-url?id=Q3xktII_PVY" autoPlay="true" />
-</mx:Application>

@@ -1,9 +1,0 @@
-package com.greensock.loading {
-
-    public class YoutubeLoader extends VideoLoader {
-        public function YoutubeLoader(urlOrRequest:*, vars:Object = null) {
-            urlOrRequest = 'https://r7---sn-cvh7kn7s.googlevideo.com/videoplayback?ei=1I1DWJ_OGtOXoAOJgI_oCg&pl=22&upn=zhnZjZInmXU&ipbits=0&mt=1480822027&requiressl=yes&ratebypass=yes&itag=18&lmt=1479241276784248&dur=102.887&expire=1480843828&nh=IgpwcjAxLmJvbTA3Kg4xMTUuMTEzLjE2NS45Nw&source=youtube&mime=video%2Fmp4&key=yt6&sparams=clen%2Cdur%2Cei%2Cgir%2Cid%2Cinitcwndbps%2Cip%2Cipbits%2Citag%2Clmt%2Cmime%2Cmm%2Cmn%2Cms%2Cmv%2Cnh%2Cpl%2Cratebypass%2Crequiressl%2Csource%2Cupn%2Cexpire&initcwndbps=366250&clen=8001727&gir=yes&mn=sn-cvh7kn7s&id=o-AMjtSCkBU_pZGe5EhxOwMCcBRV2LhTaXDSyHVEU4IFad&mm=31&mv=m&ms=au&ip=123.252.241.119&signature=95642B32EA43497095F89FDF4D2514C989D65BEE.12DFF00C99F9CFFBA5489DB7FA97FA1269399E30';
-            super(urlOrRequest, { autoPlay: true, width: 640, height: 480 });
-        }
-    }
-}
