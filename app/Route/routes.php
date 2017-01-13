@@ -4,4 +4,4 @@
 use Minute\Model\Permission;
 use Minute\Routing\Router;
 
-$router->get('/test', 'Test', false);
+$router->get('/test', null, false);

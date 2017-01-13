@@ -3,12 +3,14 @@
     "alertify": "registry:dt/alertify",
     "angular": "registry:dt/angular",
     "angular-gettext": "registry:dt/angular-gettext",
-    "angular-mocks": "registry:dt/angular-mocks",
     "component-emitter": "registry:dt/component-emitter",
     "es6-promise": "registry:dt/es6-promise",
     "jasmine": "registry:dt/jasmine",
     "jquery": "registry:dt/jquery",
     "lodash": "registry:dt/lodash",
     "showdown": "registry:dt/showdown"
+  },
+  "dependencies": {
+    "angular-mocks": "registry:dt/angular-mocks"
   }
 }

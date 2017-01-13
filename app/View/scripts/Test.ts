@@ -6,6 +6,7 @@ module App {
                     public gettext:angular.gettext.gettextFunction, public gettextCatalog:angular.gettext.gettextCatalog) {
 
             gettextCatalog.setCurrentLanguage($scope.session.lang || 'en');
+            $scope.hello = 'It works!';
         }
     }
 
