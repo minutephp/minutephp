@@ -1,16 +1,16 @@
 {
   "globalDependencies": {
     "alertify": "registry:dt/alertify",
-    "angular": "registry:dt/angular",
-    "angular-gettext": "registry:dt/angular-gettext",
-    "component-emitter": "registry:dt/component-emitter",
     "es6-promise": "registry:dt/es6-promise",
     "jasmine": "registry:dt/jasmine",
-    "jquery": "registry:dt/jquery",
-    "lodash": "registry:dt/lodash",
-    "showdown": "registry:dt/showdown"
+    "jquery": "registry:dt/jquery"
   },
   "dependencies": {
+    "angular": "registry:dt/angular",
+    "lodash": "registry:dt/lodash",
+    "showdown": "registry:dt/showdown",
+    "component-emitter": "registry:dt/component-emitter",
+    "angular-gettext": "registry:dt/angular-gettext",
     "angular-mocks": "registry:dt/angular-mocks"
   }
 }
