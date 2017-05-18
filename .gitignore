@@ -10,3 +10,4 @@ composer.lock
 /public/tmp
 /db
 /public/test.php
+/etc
