@@ -18,7 +18,7 @@
     "AdminLTE": "admin-lte#^2.3.5",
     "alertifyjs": "^1.0.11",
     "angular": "^1",
-    "angular-bs-tooltip": "ace1654f171c0305dda79cd6614941104406da5e",
+    "angular-bs-tip": "minutejs/angular-bs-tip",
     "angular-country-select": "minutejs/angular-country-select",
     "angular-dynamic-html": "minutejs/angular-dynamic-html",
     "angular-filter": "^0.5.8",
